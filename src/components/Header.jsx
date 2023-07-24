@@ -1,10 +1,10 @@
 import Filters from './Filters.jsx';
 
-function Header({ changeFilters }) {
+function Header() {
   return (
     <header>
       <h1>React App</h1>
-      <Filters changeFilters={changeFilters} />
+      <Filters />
     </header>
   );
 }
