@@ -22,19 +22,31 @@ export const cartReducer = (state, action) => {
 
       // Si el producto ya está en el carrito, entonces aumentamos la cantidad.
       if (productInCart >= 0) {
+        // con structuredClone
         // const newState = structuredClone(state);
         // newState[productInCart].quantity += 1;
 
-        const newState = state.map((item, index) => {
-          if (index === productInCart) {
-            return {
-              ...item,
-              quantity: item.quantity + 1
-            };
-          }
+        //con map
+        // const newState = state.map((item, index) => {
+        //   if (index === productInCart) {
+        //     return {
+        //       ...item,
+        //       quantity: item.quantity + 1
+        //     };
+        //   }
 
-          return item;
-        });
+        //   return item;
+        // });
+
+        // con spread operator
+        const newState = [
+          ...state.slice(0, productInCart),
+          {
+            ...state[productInCart],
+            quantity: state[productInCart].quantity + 1
+          },
+          ...state.slice(productInCart + 1)
+        ];
 
         updateLocalStorage(newState);
         return newState;
